@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("node:path");
-const router = require("./routes/router");
+const router = require("./routes/membersRouter.js");
 require("dotenv").config();
 
 const app = express();
@@ -14,7 +14,7 @@ app.use(express.static(assetsPath));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-require("./passport/passport")(passport);
+// require("./passport/passport")(passport);
 // app.use(passport.initialize());
 
 app.use("/", router);
