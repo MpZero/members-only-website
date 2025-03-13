@@ -17,30 +17,16 @@ const {
 // );
 
 router.get("/", (req, res) => res.status(201).json({ msg: "heyy" }));
-router.get("/sign-up", (req, res) => res.render("signUp"));
-
-router.post("/sign-up", validateUser, createUserPost);
-// try {
-//   console.log(req.body);
-//   const hashedPassword = await genPw(req.body.password);
-//   // console.log(hashedPassword);
-//   // res.redirect("/");
-//   pool.query("INSERT INTO users (first_name, last_name, username, password) VALUES ($1, $2)", [
-//     req.body.username,
-//     hashedPassword,
-//   ]);
-//   const user = await pool.query("SELECT FROM users WHERE id = $1", [
-//     req.body.id,
-//   ]);
-//   const jwt = utils.issueJWT(user);
-//   res.json({
-//     success: true,
-//     user: user,
-//     token: jwt.token,
-//     expiresIn: jwt.expires,
-//   });
-// } catch (err) {
-//   return next(err);
-// }
+router.get("/sign-up", (req, res) =>
+  res.render("signUp", {
+    firstName: "",
+    lastName: "",
+    username: "",
+    password: "",
+    title: "Create User",
+    errors: [],
+  })
+);
+router.post("/sign-up", createUserPost);
 
 module.exports = router;

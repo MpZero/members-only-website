@@ -3,92 +3,76 @@ const { body, validationResult } = require("express-validator");
 const { genPassword, issueJWT } = require("../utils/passwordUtils");
 
 const alphaErr = "must only contain letters.";
-const lengthErr = "must be between 1 and 10 characters.";
+const lengthErr = "must be between 1 and 15 characters.";
 
 const validateUser = [
   body("firstName")
     .trim()
     .isAlpha()
     .withMessage(`First name ${alphaErr}`)
-    .isLength({ min: 1, max: 10 })
+    .isLength({ min: 1, max: 15 })
     .withMessage(`First name ${lengthErr}`),
   body("lastName")
     .trim()
     .isAlpha()
     .withMessage(`Last name ${alphaErr}`)
-    .isLength({ min: 1, max: 10 })
+    .isLength({ min: 1, max: 15 })
     .withMessage(`Last name ${lengthErr}`),
   body("username")
     .trim()
-    .isAlpha()
-    .withMessage(`Username ${alphaErr}`)
-    .isLength({ min: 1, max: 10 })
+    .isLength({ min: 1, max: 20 })
     .withMessage(`Username ${lengthErr}`),
-  // body("password")
-  //   .optional({ checkFalsy: true })
-  //   .isInt({ gt: 18, lt: 120 })
-  //   .withMessage(`Age ${isIntErr}`),
+  body("confirmPassword").custom((value, { req }) => {
+    console.log(`value: ${value}`);
+    console.log(`req body password: ${req.body.password}`);
+    if (value !== req.body.password) {
+      throw new Error("Password confirmation does not match with password");
+    }
+    return true;
+  }),
 ];
 
-const createUserPost = async (req, res, next) => {
-  const { firstName, lastName, username, password } = req.body;
+const createUserPost = [
+  validateUser,
+  async (req, res, next) => {
+    console.log("Received req.body:", req.body);
 
-  try {
-    console.log(req.body);
+    const errors = validationResult(req);
 
-    const hashedPassword = await genPassword(password);
-    // console.log(hashedPassword);
-    // res.redirect("/");
-    // pool.insertNewUser("INSERT INTO users (username, password) VALUES ($1, $2)", [
+    const { firstName, lastName, username, password } = req.body;
 
-    pool.query(
-      "INSERT INTO users (first_name, last_name, username, password, mem_status) VALUES ($1, $2, $3, $4, $5)",
-      [firstName, lastName, username, hashedPassword, false]
-    );
+    if (!errors.isEmpty()) {
+      return res.status(400).render("signUp", {
+        firstName: firstName || "",
+        lastName: lastName || "",
+        username: username || "",
+        password: password || "",
+        title: "Create user" || "",
+        errors: errors.array(),
+      });
+    }
 
-    const user = await pool.query("SELECT FROM users WHERE users_id = $1", [
-      req.body.users_id,
-    ]);
-    const jwt = issueJWT(user);
-    res.json({
-      success: true,
-      user: user,
-      token: jwt.token,
-      expiresIn: jwt.expires,
-    });
-  } catch (err) {
-    return next(err);
-  }
-};
+    try {
+      const hashedPassword = await genPassword(password);
 
-// try {
-//   const errors = validationResult(req);
-//   if (!errors.isEmpty()) {
-//     return res.status(400).json({ errors: errors.array() });
-//   }
-//   await db.insertAlbum(firstName, lastName, username, password);
-// } catch (error) {
-//   console.log("Error creating album", error);
-//   res.status(500).send("Error creating album");
-// }
-// }
-// exports.usersCreatePost = [
-//   validateUser,
-//   (req, res) => {
-//     const errors = validationResult(req);
-//     if (!errors.isEmpty()) {
-//       return res.status(400).render("createUser", {
-//         title: "Create user",
-//         errors: errors.array(),
-//       });
-//     }
-//     const { firstName, lastName, email, age, bio } = req.body;
-//     usersStorage.addUser({ firstName, lastName, email, age, bio });
-//     res.redirect("/");
-//   },
-// ];
+      const newUser = await pool.query(
+        "INSERT INTO users (first_name, last_name, username, password, mem_status) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+        [firstName, lastName, username, hashedPassword, false]
+      );
 
-// }
-// ]
+      const user = newUser.rows[0];
+      const jwt = issueJWT(user);
+
+      res.json({
+        success: true,
+        user,
+        token: jwt.token,
+        expiresIn: jwt.expires,
+      });
+    } catch (err) {
+      return next(err);
+    }
+  },
+];
 
 module.exports = { validateUser, createUserPost };
