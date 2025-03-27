@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title%></title>
+  </head>
+  <body>
+    <h1>Update membership</h1>
+    <!-- <%- include("partials/errors.ejs") %> -->
+    <form action="/membership" method="POST">
+      <label for="password">Insert Secret Password: </label>
+      <input type="password" name="password" id="password" required />
+
+      <button type="submit">Submit</button>
+    </form>
+    <a href="/">home</a>`;
+  </body>
+</html>

@@ -6,10 +6,6 @@ const {
   issueJWT,
 } = require("../utils/passwordUtils");
 require("dotenv").config();
-
-// const strategy = require("../passport/passport");
-// const passport = require("passport");
-
 const alphaErr = "must only contain letters.";
 const lengthErr = "must be between 1 and 15 characters.";
 
@@ -31,8 +27,8 @@ const validateUser = [
     .isLength({ min: 1, max: 20 })
     .withMessage(`Username ${lengthErr}`),
   body("confirmPassword").custom((value, { req }) => {
-    console.log(`value: ${value}`);
-    console.log(`req body password: ${req.body.password}`);
+    // console.log(`value: ${value}`);
+    // console.log(`req body password: ${req.body.password}`);
     if (value !== req.body.password) {
       throw new Error("Password confirmation does not match with password");
     }
@@ -110,7 +106,7 @@ const logInPost = async function (req, res, next) {
   );
   const user = rows[0];
 
-  console.log(user);
+  // console.log(user);
 
   try {
     if (!user) {
@@ -120,7 +116,7 @@ const logInPost = async function (req, res, next) {
     }
 
     const isValid = await validPassword(req.body.password, user.password);
-    console.log("hey");
+    // console.log(`is valid: ${isValid}`);
 
     if (!isValid) {
       return res
@@ -128,12 +124,29 @@ const logInPost = async function (req, res, next) {
         .json({ success: false, msg: "You entered the wrong password" });
     }
 
-    console.log(`is valid: ${isValid}`);
-    const tokenObject = issueJWT(user);
+    if (isValid) {
+      const tokenObject = issueJWT(user);
+      // console.log(tokenObject.token.split(" ")[1]);
+      // res.cookie("jwt", tokenObject.token, { httpOnly: true, secure: true });
+      res.cookie("jwt", tokenObject.token.split(" ")[1], {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 150000,
+      });
 
-    res.cookie("token", tokenObject.token);
-
-    return res.redirect("/protected");
+      // res.status(200).json({
+      //   success: true,
+      //   token: tokenObject.token.split(" ")[1],
+      //   user: user,
+      //   expiresIn: tokenObject.expires,
+      // });
+      return res.redirect("/protected");
+    } else {
+      res
+        .status(401)
+        .json({ success: false, msg: "you entered the wrong password" });
+    }
   } catch (err) {
     next(err);
   }
@@ -153,7 +166,7 @@ const updateMemStatusPost = async (req, res) => {
     try {
       await pool.query(
         "UPDATE users SET mem_status = true WHERE users_id = $1",
-        [req.user.users_id] // Using the logged-in user's id from JWT
+        [req.user.users_id]
       );
       return res.redirect("/");
     } catch (err) {

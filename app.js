@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-// require("./passport/passport.js")(passport);
+require("./passport/passport")(passport);
 app.use(passport.initialize());
 
 app.use("/", router);
