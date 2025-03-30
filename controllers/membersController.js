@@ -106,7 +106,7 @@ const logInPost = async function (req, res, next) {
   );
   const user = rows[0];
 
-  // console.log(user);
+  // console.log(`1. log in user`, user);
 
   try {
     if (!user) {
@@ -126,13 +126,16 @@ const logInPost = async function (req, res, next) {
 
     if (isValid) {
       const tokenObject = issueJWT(user);
+      // console.log(`2. log in valid token`, tokenObject);
+
       // console.log(tokenObject.token.split(" ")[1]);
       // res.cookie("jwt", tokenObject.token, { httpOnly: true, secure: true });
+      // res.cookie("jwt", tokenObject.token.split(" ")[1], {
       res.cookie("jwt", tokenObject.token.split(" ")[1], {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
-        maxAge: 150000,
+        maxAge: 24 * 60 * 60 * 1000,
       });
 
       // res.status(200).json({
@@ -156,13 +159,18 @@ const updateMemStatusGet = (req, res) => {
   res.render("updateMem", { title: "Update Membership" });
 };
 
-const updateMemStatusPost = async (req, res) => {
-  console.log(`body`, req.body);
-  console.log(`user`, req.user);
+const updateMemStatusPost = (req, res) => {
+  console.log(`5 body`, req.body);
+  console.log(`6 user`, req.user);
+  // if (passcode == "oo") {
+  //   console.log(`body`, req.body);
+  //   console.log(`user`, req.user);
 
-  const { passcode } = req.body;
+  //   const { passcode } = req.body;
+  // }
+  // return;
 
-  if (passcode == "oo") {
+  /*   if (passcode == "oo") {
     try {
       await pool.query(
         "UPDATE users SET mem_status = true WHERE users_id = $1",
@@ -175,7 +183,7 @@ const updateMemStatusPost = async (req, res) => {
     }
   } else {
     return res.status(400).json({ msg: "Invalid passcode" });
-  }
+  } */
 };
 
 module.exports = {

@@ -9,12 +9,14 @@ const PRIV_KEY = fs.readFileSync(pathToKey, "utf8");
 function issueJWT(user) {
   const id = user.users_id;
 
-  const expiresIn = "15m";
+  const expiresIn = Math.floor(Date.now() / 1000) + 24 * 60 * 60;
 
   const payload = {
     sub: id,
-    iat: Date.now(),
+    iat: Math.floor(Date.now() / 1000),
+    // exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
   };
+  // console.log(`Payload issue`, payload);
 
   const signedToken = jwt.sign(payload, PRIV_KEY, {
     expiresIn: expiresIn,

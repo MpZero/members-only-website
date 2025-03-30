@@ -9,6 +9,9 @@ const pathToKey = path.join(__dirname, "..", "id_rsa_pub.pem");
 const PUB_KEY = fs.readFileSync(pathToKey, "utf8");
 
 const cookieExtractor = (req) => {
+  /*   
+  console.log(`cookie extractor`, req.cookies);
+   */
   let token = null;
   if (req && req.cookies) {
     token = req.cookies["jwt"];
@@ -26,7 +29,7 @@ const options = {
 module.exports = (passport) => {
   passport.use(
     new JwtStrategy(options, async function (payload, done) {
-      // console.log(payload);
+      // console.log(`passport payload`, payload);
 
       const result = await db.query("SELECT * FROM users WHERE users_id = $1", [
         payload.sub,
