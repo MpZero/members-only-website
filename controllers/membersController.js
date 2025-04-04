@@ -155,6 +155,18 @@ const logInPost = async function (req, res, next) {
   }
 };
 
+const logOut = (req, res) => {
+  res.clearCookie("jwt", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+  });
+
+  return res
+    .status(200)
+    .json({ success: true, msg: "Logged out successfully" });
+};
+
 const updateMemStatusGet = (req, res) => {
   res.render("updateMem", { title: "Update Membership" });
 };
@@ -192,6 +204,7 @@ module.exports = {
   createUserPost,
   logInGet,
   logInPost,
+  logOut,
   updateMemStatusGet,
   updateMemStatusPost,
 };

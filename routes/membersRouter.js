@@ -10,12 +10,14 @@ const {
   logInGet,
   logInPost,
   updateMemStatusGet,
+  logOut,
   // updateMemStatusGet,
   // updateMemStatusPost,
 } = require("../controllers/membersController");
+const { getMessages } = require("../controllers/messageController");
 const { cookieJwtAuth } = require("./middleware/cookieJwtAuth");
 
-router.get("/", (req, res) => res.status(201).json({ msg: "heyy" }));
+router.get("/", (req, res) => res.status(201).render("index"));
 
 router.get("/sign-up", createUserGet);
 router.post("/sign-up", createUserPost);
@@ -36,6 +38,9 @@ router.post(
   // passport.authenticate("jwt", { session: false }),
   updateMemStatusGet
 );
+
+// router.get("/message-board", getMessages);
+
 router.get(
   "/protected",
   // passport.authenticate("jwt", { session: false }),
@@ -48,5 +53,7 @@ router.get(
     });
   }
 );
+
+router.get("/logout", logOut);
 
 module.exports = router;
