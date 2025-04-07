@@ -169,12 +169,31 @@ const logOut = (req, res) => {
 
 const updateMemStatusGet = (req, res) => {
   res.render("updateMem", { title: "Update Membership" });
+  console.log(`req user updatememget`, req.user);
 };
 
-const updateMemStatusPost = (req, res) => {
-  console.log(`5 body`, req.body);
-  console.log(`6 user`, req.user);
-  // if (passcode == "oo") {
+const updateMemStatusPost = async (req, res) => {
+  // console.log(`5 body`, req.body);
+  const passcode = req.body.password;
+  try {
+    if (passcode == process.env.SECRET_PW) {
+      await pool.query(
+        "UPDATE users SET mem_status = true WHERE users_id = $1",
+        [req.user.users_id]
+      );
+      console.log("succesfully became a member!");
+      return res.redirect("/");
+    } else {
+      return res.status(400).json({ msg: "Invalid passcode" });
+    }
+  } catch (error) {
+    console.log("incorrect pw!");
+    return res.status(500).json({ msg: "Server error", error });
+  }
+  // console.log(`req user updatemempost`, req.user);
+
+  // console.log(`req user updatemempost2`, req.user);
+
   //   console.log(`body`, req.body);
   //   console.log(`user`, req.user);
 
