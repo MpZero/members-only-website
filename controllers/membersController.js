@@ -144,7 +144,7 @@ const logInPost = async function (req, res, next) {
       //   user: user,
       //   expiresIn: tokenObject.expires,
       // });
-      return res.redirect("/protected");
+      return res.redirect("/message-board");
     } else {
       res
         .status(401)

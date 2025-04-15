@@ -13,6 +13,11 @@ const {
   updateMemStatusGet,
   updateMemStatusPost,
 } = require("../controllers/membersController");
+
+const {
+  messageBoardGet,
+  getMessages,
+} = require("../controllers/messageController");
 // const { getMessages } = require("../controllers/messageController");
 // const { cookieJwtAuth } = require("./middleware/cookieJwtAuth");
 
@@ -37,6 +42,8 @@ router.post(
   // passport.authenticate("jwt", { session: false }),
   updateMemStatusPost
 );
+
+router.get("/message-board", getMessages);
 
 // router.get("/message-board", getMessages);
 

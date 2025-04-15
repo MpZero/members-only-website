@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title%></title>
+  </head>
+  <body>
+    <%- include("partials/navbar") %>
+    <h1>Message board</h1>
+    <ul>
+      <% messages.map((message) => { %>
+      <li>
+        <% if (message.username){%>
+        <p><b>User:</b> <%=message.username%></p>
+        <p><b>Title:</b> <%= message.title %></p>
+        <p><b>Message:</b> <%= message.text %></p>
+        <p><b>Added on:</b> <%= message.timestamp.toDateString() %></p>
+        <%} else {%>
+        <p><b>Title:</b> <%= message.title %></p>
+        <p><b>Message:</b> <%= message.text %></p>
+        <%} %>
+      </li>
+      <%})%>
+    </ul>
+  </body>
+</html>
