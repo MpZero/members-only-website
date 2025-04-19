@@ -15,8 +15,9 @@ const {
 } = require("../controllers/membersController");
 
 const {
-  messageBoardGet,
   getMessages,
+  createMessageGet,
+  createMessagePost,
 } = require("../controllers/messageController");
 // const { getMessages } = require("../controllers/messageController");
 // const { cookieJwtAuth } = require("./middleware/cookieJwtAuth");
@@ -44,6 +45,9 @@ router.post(
 );
 
 router.get("/message-board", getMessages);
+
+router.get("/create-message", createMessageGet);
+router.post("/create-message", createMessagePost);
 
 // router.get("/message-board", getMessages);
 
