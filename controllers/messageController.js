@@ -11,7 +11,14 @@ async function getMessages(req, res) {
       // console.log(rows.rows);
 
       const messages = rows.rows;
-      res.render("messageBoard", { title: "messageBoard", messages });
+      // console.log(messages);
+      // console.log(req.user);
+      const username = user.username;
+      res.render("messageBoard", {
+        title: "Message Board",
+        messages,
+        username,
+      });
     } else if (user && user.mem_status == false) {
       const rows = await pool.query(
         "SELECT messages_id, title, text FROM messages ORDER BY messages_id DESC"
@@ -26,7 +33,7 @@ async function getMessages(req, res) {
     res.status(500).send("Error fetching messages");
   }
 }
-const messageBoardGet = (req, res) => {
+/* const messageBoardGet = (req, res) => {
   res.render("messageBoard");
 };
 
@@ -38,15 +45,12 @@ async function getAllMsg() {
     console.error("Error getting all messages:", error);
     throw new Error("Failed to retrieve all messages");
   }
-}
+} */
 
-function createMessageGet(req, res) {
+function getCreateMessage(req, res) {
   res.render("addMsgForm", { title: "Create a New Message" });
 }
-async function createMessagePost(req, res) {
-  // console.log(req.body);
-  // console.log(req.user);
-  // console.log(req.user.users_id);
+async function postCreateMessage(req, res) {
   const userId = req.user.users_id;
   const title = req.body.title;
   const text = req.body.msg;
@@ -58,10 +62,52 @@ async function createMessagePost(req, res) {
   res.redirect("/message-board");
 }
 
+async function getMessageUpdate(req, res) {
+  console.log(req.params);
+  const msgId = req.params.id;
+
+  try {
+    const row = await pool.query(
+      `SELECT * FROM messages WHERE messages_id = $1`,
+      [msgId]
+    );
+    const message = row.rows;
+    console.log(message);
+
+    res.render("updateMsg", {
+      title: "Update Message",
+      message: message,
+    });
+  } catch (error) {
+    console.error("Error getting message:", error);
+    throw new Error("Failed to retrieve message");
+  }
+}
+
+async function postMessageUpdate(req, res) {
+  try {
+    const msgId = req.params.id;
+    const title = req.body.title;
+    const msg = req.body.msg;
+    await pool.query(
+      "UPDATE messages SET title = $1, text = $2 WHERE messages_id = $3 ",
+      [title, msg, msgId]
+    );
+    res.redirect("/message-board");
+  } catch (error) {
+    console.error("Error getting message:", error);
+    throw new Error("Failed to retrieve message");
+  }
+}
+
+// console.log(`get album update: album`, album);
+
 module.exports = {
   getMessages,
-  messageBoardGet,
-  getAllMsg,
-  createMessageGet,
-  createMessagePost,
+  /* messageBoardGet,
+  getAllMsg, */
+  getCreateMessage,
+  postCreateMessage,
+  getMessageUpdate,
+  postMessageUpdate,
 };

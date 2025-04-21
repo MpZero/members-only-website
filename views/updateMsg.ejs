@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="/" />
+
+    <title><%= title %></title>
+  </head>
+  <body>
+    <%- include("partials/navbar"); %> <% message.map((message) => { %>
+    <form method="post" action="/message-board/edit/<%= message.messages_id %>">
+      <label for="title">Edit Title</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        value="<%= message.title %>"
+        required
+      />
+      <label for="msg">Edit Message</label>
+      <input
+        type="text"
+        id="msg"
+        name="msg"
+        value="<%= message.text %>"
+        required
+      />
+      <button type="submit">Submit</button>
+    </form>
+    <%})%>
+  </body>
+</html>

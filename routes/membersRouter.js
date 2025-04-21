@@ -16,8 +16,10 @@ const {
 
 const {
   getMessages,
-  createMessageGet,
-  createMessagePost,
+  getCreateMessage,
+  postCreateMessage,
+  getMessageUpdate,
+  postMessageUpdate,
 } = require("../controllers/messageController");
 // const { getMessages } = require("../controllers/messageController");
 // const { cookieJwtAuth } = require("./middleware/cookieJwtAuth");
@@ -46,11 +48,12 @@ router.post(
 
 router.get("/message-board", getMessages);
 
-router.get("/create-message", createMessageGet);
-router.post("/create-message", createMessagePost);
+router.get("/create-message", getCreateMessage);
+router.post("/create-message", postCreateMessage);
 
 // router.get("/message-board", getMessages);
-
+router.get("/message-board/edit/:id", getMessageUpdate);
+router.post("/message-board/edit/:id", postMessageUpdate);
 router.get(
   "/protected",
   // passport.authenticate("jwt", { session: false }),

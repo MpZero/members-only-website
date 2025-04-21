@@ -16,7 +16,12 @@
         <p><b>Title:</b> <%= message.title %></p>
         <p><b>Message:</b> <%= message.text %></p>
         <p><b>Added on:</b> <%= message.timestamp.toDateString() %></p>
-        <%} else {%>
+        <% if (message.username == username){%>
+        <!-- <button type="button">Edit</button> -->
+        <a href="/message-board/edit/<%= message.messages_id%>"
+          ><button class="update-btn">Edit</button></a
+        >
+        <%}else {%> <%return%> <%} %> <%} else {%>
         <p><b>Title:</b> <%= message.title %></p>
         <p><b>Message:</b> <%= message.text %></p>
         <%} %>
