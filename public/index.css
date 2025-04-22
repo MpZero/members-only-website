@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+* {
+  color: var(--text);
+}
+.main-wrapper {
+  margin: 0 auto;
+  background-color: var(--background);
+  background-color: var(--grey--800);
+  text-align: center;
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: 3rem auto 1.5rem;
+}
+
+.h1 {
+  font-size: 0.9rem;
+  padding: 1rem;
+  background-color: var(--primary);
+  background-color: var(--secondary);
+}
+
+.links-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 7.3rem 2.3rem;
+}
+
+.link {
+  border: none;
+  padding: 1rem;
+  background-color: var(--primary);
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  will-change: transform;
+  transition: color 0.4s, background-color 0.8s, transform 1s ease;
+}
+
+.link:hover,
+.link:focus {
+  transform: translateY(-4px);
+  background-color: var(--secondary);
+}
+
+.attribution {
+  font-size: 0.9rem;
+  background-color: var(--secondary);
+}
+
+@media (min-width: 1024px) {
+  .links-wrapper {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .link {
+    padding: 1.2rem 6rem;
+  }
+}

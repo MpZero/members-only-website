@@ -3,12 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="index.css" />
+    <title>Message App</title>
   </head>
   <body>
-    <h1>Homepage</h1>
-    <ul>
-      <li><a href="/log-in">Log in</a></li>
-      <li><a href="/sign-up">Sign up</a></li>
-    </ul>
+    <main class="main-wrapper">
+      <h1 class="h1">Message App</h1>
+      <div class="links-wrapper">
+        <a class="link" href="/log-in">Log in</a>
+        <a class="link" href="/sign-up">Sign up</a>
+      </div>
+      <%- include("partials/attribution") %>
+    </main>
   </body>
 </html>
