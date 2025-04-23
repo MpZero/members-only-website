@@ -14,10 +14,8 @@
 }
 
 .h1 {
-  font-size: 0.9rem;
+  font-size: 1.5rem;
   padding: 1rem;
-  background-color: var(--primary);
-  background-color: var(--secondary);
 }
 
 .links-wrapper {
@@ -30,7 +28,7 @@
 .link {
   border: none;
   padding: 1rem;
-  background-color: var(--primary);
+  background-color: var(--grey--700);
   border-radius: 10px;
   font-weight: 600;
   text-decoration: none;
@@ -41,12 +39,8 @@
 .link:hover,
 .link:focus {
   transform: translateY(-4px);
-  background-color: var(--secondary);
-}
-
-.attribution {
-  font-size: 0.9rem;
-  background-color: var(--secondary);
+  background-color: var(--green);
+  color: var(--grey--900);
 }
 
 @media (min-width: 1024px) {

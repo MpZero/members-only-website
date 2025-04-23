@@ -3,25 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="logIn.css" />
     <title><%= title%></title>
   </head>
   <body>
-    <h1>Log In</h1>
-    <%- include("partials/errors.ejs") %>
-    <form action="/log-in" method="POST">
-      <label for="username">Username: </label>
-      <input
-        type="text"
-        name="username"
-        id="username"
-        value="<%= username || '' %>"
-        required
-      />
-      <label for="password">Password: </label>
-      <input type="password" name="password" id="password" required />
+    <main class="main-wrapper">
+      <h1>Log In</h1>
+      <div class="form-wrapper">
+        <form class="form" action="/log-in" method="POST">
+          <label for="username">Username: </label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            value="<%= username || '' %>"
+            required
+          />
+          <label for="password">Password: </label>
+          <input type="password" name="password" id="password" required />
+          <button class="form-btn" type="submit">Submit</button>
+          <!-- <%- include("partials/errors.ejs") %> -->
+        </form>
+        <div class="home-link-wrapper">
+          <a class="home-link" href="/">home</a>
+        </div>
+      </div>
 
-      <button type="submit">Submit</button>
-    </form>
-    <a href="/">home</a>`;
+      <%- include("partials/attribution") %>
+    </main>
   </body>
 </html>
