@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
 :root {
   --border-radius: 14px;
 
@@ -12,25 +14,6 @@
   --grey--900: hsl(0, 0%, 8%);
 }
 
-/* @media (prefers-color-scheme: light) {
-  :root {
-    --text: hsl(100, 10%, 6%);
-    --background: hsl(90, 40%, 98%);
-    --primary: hsl(92, 42%, 26%);
-    --secondary: hsl(93, 58%, 66%);
-    --accent: hsl(93, 74%, 47%);
-  }
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: hsl(100, 10%, 94%);
-    --background: hsl(90, 40%, 2%);
-    --primary: hsl(92, 42%, 74%);
-    --secondary: hsl(93, 58%, 34%);
-    --accent: hsl(93, 74%, 53%);
-  }
-} */
-
 /* 1. Use a more-intuitive box-sizing model */
 *,
 *::before,
@@ -41,7 +24,7 @@
 /* 2. Remove default margin */
 * {
   margin: 0;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Inter", "Courier New", Courier, monospace;
 }
 
 body {

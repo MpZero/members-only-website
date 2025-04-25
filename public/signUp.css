@@ -1,14 +1,13 @@
 .main-wrapper {
   background-color: var(--grey--800);
   display: grid;
-  height: 100vh;
-  grid-template-rows: 3rem auto 1.5rem;
   text-align: center;
 }
 
 h1 {
   color: var(--text);
-  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  font-size: 1.8rem;
 }
 
 .home-link {
@@ -31,8 +30,12 @@ h1 {
   padding-block: 2rem;
 }
 
-.form > input#username {
+.form > input {
   margin-bottom: 1rem;
+}
+
+.form > button:nth-child(11) {
+  margin-top: 0.2rem;
 }
 
 .form-btn {

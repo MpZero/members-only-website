@@ -3,53 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="signUp.css" />
+
     <title><%= title%></title>
   </head>
   <body>
-    <h1>sign up page</h1>
-    <%- include("partials/errors.ejs") %>
-    <form action="/sign-up" method="POST">
-      <label for="firstName">First Name: </label>
-      <input
-        type="text"
-        name="firstName"
-        id="firstName"
-        value="<%= firstName || '' %>"
-        required
-      />
-      <label for="lastName">Last Name: </label>
-      <input
-        type="text"
-        name="lastName"
-        id="lastName"
-        value="<%= lastName || '' %>"
-        required
-      />
-      <label for="username">Username: </label>
-      <input
-        type="text"
-        name="username"
-        id="username"
-        value="<%= username || '' %>"
-        required
-      />
-      <label for="password">Password: </label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        value="<%= password || '' %>"
-        required
-      />
-      <label for="confirmPassword">Confirm Password: </label>
-      <input
-        type="password"
-        name="confirmPassword"
-        id="confirmPassword"
-        required
-      />
-      <button type="submit">Submit</button>
-    </form>
-    <a href="/">home</a>`;
+    <main class="main-wrapper">
+      <h1>Sign Up</h1>
+      <%- include("partials/errors.ejs") %>
+      <div class="form-wrapper">
+        <form class="form" action="/sign-up" method="POST">
+          <label for="firstName">First Name: </label>
+          <input
+            type="text"
+            name="firstName"
+            id="firstName"
+            value="<%= firstName || '' %>"
+            required
+          />
+          <label for="lastName">Last Name: </label>
+          <input
+            type="text"
+            name="lastName"
+            id="lastName"
+            value="<%= lastName || '' %>"
+            required
+          />
+          <label for="username">Username: </label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            value="<%= username || '' %>"
+            required
+          />
+          <label for="password">Password: </label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value="<%= password || '' %>"
+            required
+          />
+          <label for="confirmPassword">Confirm Password: </label>
+          <input
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+            required
+          />
+          <button class="form-btn" type="submit">Submit</button>
+        </form>
+        <div class="home-link-wrapper">
+          <a class="home-link" href="/">Home</a>
+        </div>
+      </div>
+      <%- include("partials/attribution.ejs") %>
+    </main>
   </body>
 </html>
