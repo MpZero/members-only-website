@@ -1,6 +1,9 @@
 .attribution {
-  color: var(--text);
-  font-size: 0.8rem;
+  position: sticky;
+  bottom: 0px;
+  background-color: var(--grey--900);
+  font-size: 0.4rem;
+  text-align: center;
 }
 
 .attribution > a {

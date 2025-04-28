@@ -3,30 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="layout.css" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="messageBoard.css" />
     <title><%= title%></title>
   </head>
   <body>
-    <%- include("partials/navbar") %>
-    <h1>Message board</h1>
-    <ul>
-      <% messages.map((message) => { %>
-      <li>
-        <% if (message.username){%>
-        <p><b>User:</b> <%=message.username%></p>
-        <p><b>Title:</b> <%= message.title %></p>
-        <p><b>Message:</b> <%= message.text %></p>
-        <p><b>Added on:</b> <%= message.timestamp.toDateString() %></p>
-        <% if (message.username == username){%>
-        <!-- <button type="button">Edit</button> -->
-        <a href="/message-board/edit/<%= message.messages_id%>"
-          ><button class="update-btn">Edit</button></a
-        >
-        <%}else {%> <%return%> <%} %> <%} else {%>
-        <p><b>Title:</b> <%= message.title %></p>
-        <p><b>Message:</b> <%= message.text %></p>
-        <%} %>
-      </li>
-      <%})%>
-    </ul>
+    <div class="page-wrapper">
+      <%- include("partials/navbar") %>
+      <main class="main-wrapper">
+        <h1>Message board</h1>
+        <ul class="ul">
+          <% messages.map((message) => { %>
+          <li class="li msg-wrapper">
+            <% if (message.username){%>
+            <p><b class="msg-info">User:</b> <%=message.username%></p>
+
+            <p><b class="msg-info">Title:</b> <%= message.title %></p>
+            <p><b class="msg-info">Message:</b> <%= message.text %></p>
+            <p>
+              <b class="msg-info">Added on:</b> <%=
+              message.timestamp.toDateString() %>
+            </p>
+            <% if (message.username == username){%>
+            <!-- <button type="button">Edit</button> -->
+            <a href="/message-board/edit/<%= message.messages_id%>"
+              ><button class="edit-btn">Edit</button></a
+            >
+            <%}else {%> <%return%> <%} %> <%} else {%>
+            <p><b>Title:</b> <%= message.title %></p>
+            <p><b>Message:</b> <%= message.text %></p>
+            <%} %>
+          </li>
+          <%})%>
+        </ul>
+        <!-- <%- include("partials/navbarMobile") %> -->
+
+        <%- include("partials/attribution") %>
+      </main>
+    </div>
   </body>
 </html>
