@@ -31,3 +31,9 @@
   background: var(--grey--900);
   color: var(--green);
 }
+
+@media (min-width: 1024px) {
+  .attribution {
+    display: none;
+  }
+}

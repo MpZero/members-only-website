@@ -4,3 +4,10 @@
   background-color: var(--grey--900);
   color: var(--text);
 }
+
+@media (min-width: 1024px) {
+  .page-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
+}

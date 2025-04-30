@@ -1,8 +1,6 @@
 .nav {
   font-size: 0.5rem;
-  justify-content: space-evenly;
-  position: sticky;
-  top: 0px;
+  /* justify-content: space-between; */
   background-color: var(--grey--900);
   display: none;
 }
@@ -10,7 +8,59 @@
 @media (min-width: 1024px) {
   .nav {
     display: flex;
+    flex-direction: column;
+    padding-inline: 1rem;
+    font-size: clamp(0.2rem, 2vw, 0.6rem);
   }
+
+  .navbar-content-wrapper {
+    position: sticky;
+    top: 20px;
+    gap: 1rem;
+  }
+
+  .navbar-links-wrapper {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .link {
+    border: none;
+    font-weight: 600;
+    color: var(--text);
+
+    padding: 1rem;
+    background-color: var(--grey--700);
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    will-change: transform;
+    transition: color 0.4s, background-color 0.8s, transform 1s ease;
+  }
+
+  .link:hover,
+  .link:focus {
+    transform: translateY(-4px);
+    background-color: var(--green);
+    color: var(--grey--900);
+  }
+
+  .attribution-mobile {
+    position: fixed;
+    bottom: 0;
+    width: 24%;
+    display: flex;
+    justify-content: center;
+    width: 24%;
+  }
+
+  /* ---------------------------------------- */
+
+  /* Navbar principal */
+
+  /* Contenedor sticky */
+
+  /* Enlaces del navbar */
 }
 
 /* .nav {
