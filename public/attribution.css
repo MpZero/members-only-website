@@ -2,31 +2,32 @@
   position: sticky;
   bottom: 0px;
   background-color: var(--grey--900);
-  font-size: 0.4rem;
+  font-size: clamp(0.4rem, 2vw, 1rem);
   text-align: center;
 }
 
-.attribution > a {
+.attribution-link {
+  color: var(--green);
+  transition: color 0.3s, background-color 0.3s ease;
+}
+
+.attribution-link:link {
   color: var(--green);
 }
 
-a:link {
-  color: var(--green);
-}
-
-a:focus {
+.attribution-link:focus {
   text-decoration: none;
   background: black;
   color: var(--white);
 }
 
-a:hover {
+.attribution-link:hover {
   text-decoration: none;
   background: var(--green);
   color: var(--grey--900);
 }
 
-a:active {
+.attribution-link:active {
   background: var(--grey--900);
   color: var(--green);
 }

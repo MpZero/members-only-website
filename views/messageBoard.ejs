@@ -12,7 +12,7 @@
     <div class="page-wrapper">
       <%- include("partials/navbar") %>
       <main class="main-wrapper">
-        <h1>Message board</h1>
+        <h1 class="h1">Message board</h1>
         <ul class="ul">
           <% messages.map((message) => { %>
           <li class="li msg-wrapper">
@@ -26,9 +26,10 @@
               message.timestamp.toDateString() %>
             </p>
             <% if (message.username == username){%>
-            <!-- <button type="button">Edit</button> -->
-            <a href="/message-board/edit/<%= message.messages_id%>"
-              ><button class="edit-btn">Edit</button></a
+            <a
+              class="edit-btn"
+              href="/message-board/edit/<%= message.messages_id%>"
+              >Edit</a
             >
             <%}else {%> <%return%> <%} %> <%} else {%>
             <p><b>Title:</b> <%= message.title %></p>

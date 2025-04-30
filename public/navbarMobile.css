@@ -30,6 +30,15 @@
   width: 20px;
 }
 
+@media (min-width: 600px) {
+  .img-mobile {
+    width: 25px;
+  }
+  .link-mobile {
+    padding: 0.7rem;
+  }
+}
+
 @media (min-width: 1024px) {
   .nav-mobile {
     display: none;
