@@ -2,8 +2,13 @@
   position: sticky;
   bottom: 0px;
   background-color: var(--grey--900);
-  font-size: clamp(0.4rem, 2vw, 1rem);
+  font-size: clamp(0.4rem, 2vw, 0.8rem);
+
   text-align: center;
+}
+
+.attribution-mobile {
+  font-size: clamp(0.4rem, 2vw, 0.8rem);
 }
 
 .attribution-link {
