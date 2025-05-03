@@ -3,18 +3,21 @@
   <head>
     <link rel="stylesheet" href="navbarMobile.css" />
   </head>
-  <nav class="nav-mobile">
-    <a class="link-mobile" href="/message-board"
-      ><img class="img-mobile" src="images/home.png" alt=""
-    /></a>
-    <a class="link-mobile" href="/create-message"
-      ><img class="img-mobile" src="images/new.png" alt=""
-    /></a>
-    <a class="link-mobile" href="/membership"
-      ><img class="img-mobile" src="images/vip.png" alt=""
-    /></a>
-    <a class="link-mobile" href="/log-out"
-      ><img class="img-mobile" src="images/log-out.png" alt=""
-    /></a>
-  </nav>
+  <div class="nav-mobile-wrapper">
+    <nav class="nav-mobile">
+      <a class="link-mobile" href="/message-board"
+        ><img class="img-mobile" src="images/home.png" alt=""
+      /></a>
+      <a class="link-mobile" href="/create-message"
+        ><img class="img-mobile" src="images/new.png" alt=""
+      /></a>
+      <a class="link-mobile" href="/membership"
+        ><img class="img-mobile" src="images/vip.png" alt=""
+      /></a>
+      <a class="link-mobile" href="/log-out"
+        ><img class="img-mobile" src="images/log-out.png" alt=""
+      /></a>
+    </nav>
+    <%- include("attributionMobile") %>
+  </div>
 </html>

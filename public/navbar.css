@@ -16,6 +16,7 @@
     position: sticky;
     top: 20px;
     gap: 1rem;
+    display: grid;
   }
 
   .navbar-links-wrapper {
@@ -48,15 +49,5 @@
 
   .img-navbar {
     width: 25px;
-  }
-
-  .attribution-mobile {
-    position: fixed;
-    bottom: 0;
-    width: 24%;
-    display: flex;
-    justify-content: center;
-    width: 24%;
-    gap: 0.2rem;
   }
 }

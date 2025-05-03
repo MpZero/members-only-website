@@ -1,6 +1,4 @@
 .attribution {
-  position: sticky;
-  bottom: 0px;
   background-color: var(--grey--900);
   font-size: clamp(0.4rem, 2vw, 0.8rem);
 
@@ -9,6 +7,9 @@
 
 .attribution-mobile {
   font-size: clamp(0.4rem, 2vw, 0.8rem);
+  display: flex;
+  justify-content: center;
+  gap: 0.2rem;
 }
 
 .attribution-link {
@@ -38,7 +39,15 @@
 }
 
 @media (min-width: 1024px) {
-  .attribution {
+  .attribution-mobile {
     display: none;
+  }
+
+  .attribution {
+    position: fixed;
+    bottom: 4px;
+    justify-self: center;
+
+    gap: 0.2rem;
   }
 }

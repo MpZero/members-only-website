@@ -1,3 +1,10 @@
+.nav-mobile-wrapper {
+  position: sticky;
+  bottom: 0px;
+  z-index: 10;
+  background-color: var(--grey--900);
+}
+
 .nav-mobile {
   display: flex;
   justify-content: space-evenly;

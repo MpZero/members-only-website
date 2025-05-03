@@ -3,16 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="layout.css" />
     <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="layout.css" />
     <link rel="stylesheet" href="messageBoard.css" />
+    <link rel="stylesheet" href="attribution.css" />
     <title><%= title%></title>
   </head>
   <body>
     <div class="page-wrapper">
       <%- include("partials/navbar") %>
       <main class="main-wrapper">
-        <h1 class="h1">Message board</h1>
+        <h1 class="h1">Message Board</h1>
         <ul class="ul">
           <% messages.map((message) => { %>
           <li class="li msg-wrapper">
@@ -38,9 +39,7 @@
           </li>
           <%})%>
         </ul>
-        <!-- <%- include("partials/navbarMobile") %> -->
-
-        <%- include("partials/attribution") %>
+        <%- include("partials/navbarMobile") %>
       </main>
     </div>
   </body>
