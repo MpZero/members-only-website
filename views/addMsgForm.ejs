@@ -3,18 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="layout.css" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="addMsgForm.css" />
+    <link rel="stylesheet" href="navbar.css" />
+    <link rel="stylesheet" href="navbarMobile.css" />
+    <link rel="stylesheet" href="attribution.css" />
+
     <title><%= title%></title>
   </head>
   <body>
-    <%- include("partials/navbar") %>
-
-    <h1>Create your message!</h1>
-    <form method="post" action="/create-message">
-      <label for="title">Title</label>
-      <input type="text" id="title" name="title" required />
-      <label for="msg">Message</label>
-      <input type="text" id="msg" name="msg" required />
-      <button type="submit">Submit</button>
-    </form>
+    <div class="page-wrapper">
+      <%- include("partials/navbar") %>
+      <main class="main-wrapper">
+        <div class="h1-wrapper">
+          <h1>Create your message!</h1>
+        </div>
+        <form class="add-msg-form" method="post" action="/create-message">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" required />
+          <label for="msg">Message</label>
+          <textarea
+            class="textarea"
+            name="msg"
+            id="msg"
+            maxlength="250"
+            required
+          ></textarea>
+          <button class="submit-btn" type="submit">Submit</button>
+        </form>
+      </main>
+      <%- include("partials/navbarMobile") %>
+    </div>
   </body>
 </html>
