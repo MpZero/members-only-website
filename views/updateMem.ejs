@@ -3,17 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="layout.css" />
+    <link rel="stylesheet" href="updateMem.css" />
+    <link rel="stylesheet" href="navbarMobile.css" />
+    <link rel="stylesheet" href="navbar.css" />
+    <link rel="stylesheet" href="attribution.css" />
     <title><%= title%></title>
   </head>
   <body>
-    <h1>Update membership</h1>
-    <!-- <%- include("partials/errors.ejs") %> -->
-    <form action="/membership" method="POST">
-      <label for="password">Insert Secret Password: </label>
-      <input type="password" name="password" id="password" required />
-
-      <button type="submit">Submit</button>
-    </form>
-    <a href="/">home</a>`;
+    <div class="page-wrapper">
+      <%- include("partials/navbar") %>
+      <main class="form-wrapper">
+        <h1>Membership</h1>
+        <form class="form" action="/membership" method="POST">
+          <label for="password"
+            >Insert secret password to become a Member:
+          </label>
+          <input type="password" name="password" id="password" required />
+          <button class="submit-btn" type="submit">Submit</button>
+        </form>
+      </main>
+      <%- include("partials/navbarMobile") %>
+    </div>
   </body>
 </html>
