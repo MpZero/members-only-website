@@ -6,9 +6,15 @@
   text-align: center;
 }
 
-h1 {
+.h1 {
+  /* color: var(--text); */
+  /* margin-top: 0.5rem; */
+  padding-top: 1rem;
   color: var(--text);
-  margin-top: 0.5rem;
+}
+
+label {
+  font-size: 0.8rem;
 }
 
 .home-link {
@@ -19,10 +25,6 @@ h1 {
   padding: 1rem;
 }
 
-.home-link-wrapper {
-  display: grid;
-  justify-content: start;
-}
 .form {
   color: var(--text);
   text-align: start;
@@ -37,15 +39,10 @@ h1 {
 
 .form-btn {
   margin-top: 1rem;
-  border: none;
-  background-color: var(--grey--700);
   color: var(--text);
-}
-
-.form-btn {
-  color: var(--white);
   background-color: var(--grey--700);
   border: none;
+  text-decoration: none;
   padding: 0.5rem;
   border-radius: 10px;
   cursor: pointer;
@@ -58,8 +55,16 @@ h1 {
   background-color: var(--green);
   transform: translateY(-4px);
 }
-label {
-  font-size: 0.8rem;
+
+.signup-link-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--text);
+}
+
+.sign-up {
+  margin-top: 0.2rem;
 }
 
 @media (min-width: 700px) {

@@ -1,9 +1,9 @@
-* {
+/* * {
   color: var(--text);
-}
+} */
 .main-wrapper {
+  color: var(--text);
   margin: 0 auto;
-  background-color: var(--background);
   background-color: var(--grey--800);
   text-align: center;
   display: grid;
@@ -12,7 +12,7 @@
 }
 
 .h1 {
-  margin-top: 0.5rem;
+  padding-top: 1rem;
 }
 
 .links-wrapper {
@@ -23,6 +23,7 @@
 }
 
 .link {
+  color: var(--text);
   border: none;
   padding: 1rem;
   background-color: var(--grey--700);
@@ -39,6 +40,10 @@
   background-color: var(--green);
   color: var(--grey--900);
 }
+
+/* .attribution {
+  background-color: var(--grey--00);
+} */
 
 @media (min-width: 1024px) {
   .links-wrapper {

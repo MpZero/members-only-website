@@ -6,8 +6,8 @@
 
 h1 {
   color: var(--text);
-  padding-top: 0.5rem;
-  font-size: 1.8rem;
+  padding-top: 1rem;
+  /* font-size: 1.8rem; */
 }
 
 .home-link {

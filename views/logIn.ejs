@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="layout.css" />
     <link rel="stylesheet" href="logIn.css" />
+    <link rel="stylesheet" href="attribution.css" />
     <title><%= title%></title>
   </head>
   <body>
     <main class="main-wrapper">
-      <h1>Log In</h1>
+      <h1 class="h1">Log In</h1>
       <div class="form-wrapper">
         <form class="form" action="/log-in" method="POST">
           <label for="username">Username: </label>
@@ -23,10 +25,10 @@
           <label for="password">Password: </label>
           <input type="password" name="password" id="password" required />
           <button class="form-btn" type="submit">Submit</button>
-          <!-- <%- include("partials/errors.ejs") %> -->
         </form>
-        <div class="home-link-wrapper">
-          <a class="home-link" href="/">Home</a>
+        <div class="signup-link-wrapper">
+          <p>Not an User?</p>
+          <a href="/sign-up" class="sign-up form-btn">Sign up</a>
         </div>
       </div>
 

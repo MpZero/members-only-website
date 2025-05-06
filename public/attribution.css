@@ -1,7 +1,7 @@
 .attribution {
-  background-color: var(--grey--900);
   font-size: clamp(0.4rem, 2vw, 0.8rem);
   text-align: center;
+  color: var(--text);
 }
 
 .attribution-mobile {
@@ -46,7 +46,7 @@
     position: fixed;
     bottom: 4px;
     justify-self: center;
-    background-color: var(--grey--700);
+    /* background-color: var(--grey--700); */
     gap: 0.2rem;
   }
 }
