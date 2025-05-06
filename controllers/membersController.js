@@ -161,10 +161,7 @@ const logOut = (req, res) => {
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
   });
-
-  return res
-    .status(200)
-    .json({ success: true, msg: "Logged out successfully" });
+  return res.redirect("/");
 };
 
 const updateMemStatusGet = (req, res) => {
