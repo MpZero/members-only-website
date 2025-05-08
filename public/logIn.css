@@ -2,7 +2,8 @@
   background-color: var(--grey--800);
   display: grid;
   height: 100vh;
-  grid-template-rows: 3rem auto 1.5rem;
+  /* grid-template-rows: 3rem auto 1.5rem; */
+  /* grid-template-rows: rem auto auto 1.5rem; */
   text-align: center;
 }
 
@@ -59,6 +60,12 @@ label {
 
 .sign-up {
   margin-top: 0.2rem;
+}
+
+.attribution {
+  position: fixed;
+  bottom: 4px;
+  justify-self: center;
 }
 
 @media (min-width: 700px) {

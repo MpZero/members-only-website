@@ -26,7 +26,6 @@
 
   .link {
     border: none;
-    font-weight: 600;
     color: var(--text);
     font-size: clamp(0.4rem, 2vw, 0.8rem);
     padding: 1rem;
@@ -38,6 +37,7 @@
     transition: color 0.4s, background-color 0.8s, transform 1s ease;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   .link:hover,

@@ -106,50 +106,35 @@ const logInPost = async function (req, res, next) {
   );
   const user = rows[0];
 
-  // console.log(`1. log in user`, user);
-
   try {
     if (!user) {
-      return res
-        .status(401)
-        .json({ success: false, msg: "Could not find user" });
+      return res.status(401).render("logIn", {
+        title: "Log In",
+        errors: [{ msg: "Could not find user!" }],
+        username: req.body.username,
+      });
     }
 
     const isValid = await validPassword(req.body.password, user.password);
-    // console.log(`is valid: ${isValid}`);
 
     if (!isValid) {
-      return res
-        .status(401)
-        .json({ success: false, msg: "You entered the wrong password" });
-    }
-
-    if (isValid) {
-      const tokenObject = issueJWT(user);
-      // console.log(`2. log in valid token`, tokenObject);
-
-      // console.log(tokenObject.token.split(" ")[1]);
-      // res.cookie("jwt", tokenObject.token, { httpOnly: true, secure: true });
-      // res.cookie("jwt", tokenObject.token.split(" ")[1], {
-      res.cookie("jwt", tokenObject.token.split(" ")[1], {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        maxAge: 24 * 60 * 60 * 1000,
+      return res.status(401).render("logIn", {
+        title: "Log In",
+        errors: [{ msg: "You entered the wrong password!" }],
+        username: req.body.username,
       });
-
-      // res.status(200).json({
-      //   success: true,
-      //   token: tokenObject.token.split(" ")[1],
-      //   user: user,
-      //   expiresIn: tokenObject.expires,
-      // });
-      return res.redirect("/message-board");
-    } else {
-      res
-        .status(401)
-        .json({ success: false, msg: "you entered the wrong password" });
     }
+
+    const tokenObject = issueJWT(user);
+
+    res.cookie("jwt", tokenObject.token.split(" ")[1], {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
+    return res.redirect("/message-board");
   } catch (err) {
     next(err);
   }

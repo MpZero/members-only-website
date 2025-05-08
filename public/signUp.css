@@ -56,7 +56,13 @@ h1 {
 label {
   font-size: 0.8rem;
 }
+
 .attribution {
+  position: fixed;
+  bottom: 4px;
+  justify-self: center;
+}
+/* .attribution {
   color: var(--text);
   background-color: var(--grey--800);
   font-size: clamp(0.4rem, 2.5vw, 1rem);
@@ -86,7 +92,7 @@ label {
 .attribution-link:active {
   background: var(--grey--900);
   color: var(--green);
-}
+} */
 @media (min-width: 700px) {
   .form-wrapper {
     min-width: 700px;
