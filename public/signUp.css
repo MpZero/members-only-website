@@ -1,13 +1,13 @@
 .main-wrapper {
   background-color: var(--grey--800);
+  height: 100vh;
   display: grid;
   text-align: center;
+  justify-content: center;
 }
-
 h1 {
+  font-size: 2rem;
   color: var(--text);
-  padding-top: 1rem;
-  /* font-size: 1.8rem; */
 }
 
 .home-link {
@@ -15,45 +15,37 @@ h1 {
 }
 
 .form-wrapper {
-  padding: 1rem;
+  max-width: 700px;
 }
 
-.home-link-wrapper {
-  display: grid;
-  justify-content: start;
-}
 .form {
-  color: var(--text);
   text-align: start;
+}
+
+.form,
+.login-link-wrapper {
+  padding-inline: 1rem;
+  color: var(--text);
   display: flex;
   flex-direction: column;
-  padding-block: 2rem;
+  gap: 0.2rem;
 }
 
-.form > input {
-  margin-bottom: 1rem;
-}
-
-.form > button:nth-child(11) {
-  margin-top: 0.2rem;
+.login-link-wrapper {
+  margin-top: 0.8rem;
 }
 
 .form-btn {
-  margin-top: 1rem;
-  border: none;
-  background-color: var(--grey--700);
   color: var(--text);
-}
-
-.form-btn {
-  color: var(--white);
   background-color: var(--grey--700);
   border: none;
   padding: 0.5rem;
+  margin-top: 0.5rem;
   border-radius: 10px;
   cursor: pointer;
   font-weight: 600;
   transition: color 0.4s, background-color 0.8s, transform 1s ease;
+  text-decoration: none;
 }
 
 .form-btn:hover {
@@ -64,7 +56,37 @@ h1 {
 label {
   font-size: 0.8rem;
 }
+.attribution {
+  color: var(--text);
+  background-color: var(--grey--800);
+  font-size: clamp(0.4rem, 2.5vw, 1rem);
+}
 
+.attribution-link {
+  color: var(--green);
+  transition: color 0.3s, background-color 0.3s ease;
+}
+
+.attribution-link:link {
+  color: var(--green);
+}
+
+.attribution-link:focus {
+  text-decoration: none;
+  background: var(--grey--900);
+  color: var(--white);
+}
+
+.attribution-link:hover {
+  text-decoration: none;
+  background: var(--green);
+  color: var(--grey--900);
+}
+
+.attribution-link:active {
+  background: var(--grey--900);
+  color: var(--green);
+}
 @media (min-width: 700px) {
   .form-wrapper {
     min-width: 700px;

@@ -7,18 +7,12 @@
 }
 
 .h1 {
-  /* color: var(--text); */
-  /* margin-top: 0.5rem; */
   padding-top: 1rem;
   color: var(--text);
 }
 
 label {
   font-size: 0.8rem;
-}
-
-.home-link {
-  color: var(--green);
 }
 
 .form-wrapper {
