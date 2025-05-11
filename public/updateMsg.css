@@ -4,48 +4,49 @@
   flex-direction: column;
 }
 
+h1 {
+  text-align: center;
+  padding-top: 1rem;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+}
+
 .main-wrapper {
-  height: 100vh;
+  flex-grow: 1;
   padding: 0 1rem 2rem 1rem;
 }
 
-h1 {
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
-  text-align: center;
-  padding-top: 1rem;
-}
-
-.add-msg-form {
-  margin-top: 3rem;
+.form {
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
 }
 
-.add-msg-form > label {
-  margin-bottom: 0.1rem;
-}
-
+.form > label,
 #title,
-.textarea,
-.add-msg-form > label {
+.form > textarea {
+  font-size: clamp(2.1rem, 2vw, 3rem);
   font-size: clamp(0.7rem, 2vw, 1rem);
+
+  margin-bottom: 0.2rem;
 }
-.add-msg-form > input,
-.textarea {
-  margin-bottom: 0.8rem;
+
+#title {
+  padding: 0.4rem;
+  margin-bottom: 1rem;
 }
+
 .textarea {
   max-width: 100%;
+  min-width: 100%;
+  max-height: 190px;
   line-height: 0.9;
   height: 140px;
-  padding: 0.2rem;
-}
-.submit-btn {
-  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  padding: 0.5rem;
 }
 
 .submit-btn {
-  margin-top: 0.2rem;
+  margin-top: 1.5rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
   cursor: pointer;
   border: none;
   border-radius: 4px;
@@ -54,7 +55,7 @@ h1 {
   background-color: var(--grey--700);
   text-decoration: none;
   transition: color 0.4s, background-color 0.5s ease;
-  padding: 0.2rem;
+  padding: 0.4rem;
   text-align: center;
 }
 
@@ -70,6 +71,11 @@ h1 {
   }
 
   .main-wrapper {
+    height: 100vh;
+    padding: 0px;
+  }
+
+  .form {
     padding: 0 4rem 0 4rem;
   }
 }
