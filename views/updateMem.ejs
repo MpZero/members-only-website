@@ -16,11 +16,18 @@
       <%- include("partials/navbar") %>
       <main class="form-wrapper">
         <h1>Membership</h1>
+        <div class="error-wrapper"><%- include("partials/errors") %></div>
         <form class="form" action="/membership" method="POST">
           <label for="password"
             >Insert secret password to become a Member:
           </label>
-          <input type="password" name="password" id="password" required />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="test"
+            required
+          />
           <button class="submit-btn" type="submit">Submit</button>
         </form>
       </main>

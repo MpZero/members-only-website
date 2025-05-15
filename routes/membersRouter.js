@@ -2,9 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const passport = require("passport");
 const pool = require("../db/database");
-const { validPassword, issueJWT } = require("../utils/passwordUtils");
 const {
-  validateUser,
   createUserPost,
   createUserGet,
   logInGet,
@@ -21,8 +19,6 @@ const {
   getMessageUpdate,
   postMessageUpdate,
 } = require("../controllers/messageController");
-// const { getMessages } = require("../controllers/messageController");
-// const { cookieJwtAuth } = require("./middleware/cookieJwtAuth");
 
 router.get("/", (req, res) => res.status(201).render("index"));
 
@@ -32,40 +28,24 @@ router.post("/sign-up", createUserPost);
 router.get("/log-in", logInGet);
 router.post("/log-in", logInPost);
 
-router.use(passport.authenticate("jwt", { session: false }));
-
-router.get(
-  "/membership",
-  // passport.authenticate("jwt", { session: false }),
-  updateMemStatusGet
+router.use(
+  passport.authenticate("jwt", {
+    session: false,
+    failureRedirect: "/",
+  })
 );
 
-router.post(
-  "/membership",
-  // passport.authenticate("jwt", { session: false }),
-  updateMemStatusPost
-);
+router.get("/membership", updateMemStatusGet);
+
+router.post("/membership", updateMemStatusPost);
 
 router.get("/message-board", getMessages);
 
 router.get("/create-message", getCreateMessage);
 router.post("/create-message", postCreateMessage);
 
-// router.get("/message-board", getMessages);
 router.get("/message-board/edit/:id", getMessageUpdate);
 router.post("/message-board/edit/:id", postMessageUpdate);
-router.get(
-  "/protected",
-  // passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    res.status(200).json({
-      success: true,
-      msg: "You are successfully authenticated to this route!",
-      user: req.user,
-      // token: req.cookies.jwt,
-    });
-  }
-);
 
 router.get("/log-out", logOut);
 

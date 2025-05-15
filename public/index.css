@@ -38,10 +38,6 @@
   color: var(--grey--900);
 }
 
-/* .attribution {
-  background-color: var(--grey--00);
-} */
-
 @media (min-width: 1024px) {
   .links-wrapper {
     flex-direction: row;

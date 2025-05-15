@@ -46,7 +46,6 @@
     position: fixed;
     bottom: 4px;
     justify-self: center;
-    /* background-color: var(--grey--700); */
     gap: 0.2rem;
   }
 }

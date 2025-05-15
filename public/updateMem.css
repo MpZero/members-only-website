@@ -1,5 +1,5 @@
 .page-wrapper {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -8,6 +8,12 @@ h1 {
   font-size: clamp(1.4rem, 2.5vw, 2rem);
   text-align: center;
   padding-top: 1rem;
+}
+
+.error-wrapper {
+  display: flex;
+  justify-content: center;
+  background-color: var(--grey--700);
 }
 
 .form-wrapper {
@@ -58,8 +64,11 @@ h1 {
     display: grid;
   }
 
+  .error-wrapper {
+    margin-inline: 4rem;
+  }
   .form-wrapper {
-    height: 100vh;
+    min-height: 100vh;
     padding: 0px;
   }
 

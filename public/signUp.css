@@ -1,13 +1,15 @@
 .main-wrapper {
   background-color: var(--grey--800);
-  height: 100vh;
-  display: grid;
-  text-align: center;
-  justify-content: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
 h1 {
   font-size: 2rem;
   color: var(--text);
+  padding-top: 1rem;
 }
 
 .home-link {
@@ -15,7 +17,11 @@ h1 {
 }
 
 .form-wrapper {
-  max-width: 700px;
+  max-width: 100%;
+}
+
+.errors-ul {
+  text-align: center;
 }
 
 .form {
@@ -24,7 +30,6 @@ h1 {
 
 .form,
 .login-link-wrapper {
-  padding-inline: 1rem;
   color: var(--text);
   display: flex;
   flex-direction: column;
@@ -57,42 +62,30 @@ label {
   font-size: 0.8rem;
 }
 
-.attribution {
-  position: fixed;
-  bottom: 4px;
-  justify-self: center;
+.login-link-wrapper {
+  margin-top: 0.8rem;
+  text-align: center;
 }
-/* .attribution {
+
+.attribution {
+  font-size: clamp(0.5rem, 2vw, 0.8rem);
   color: var(--text);
-  background-color: var(--grey--800);
-  font-size: clamp(0.4rem, 2.5vw, 1rem);
+  text-align: center;
+  margin-top: auto;
+  padding-top: 1rem;
 }
 
 .attribution-link {
   color: var(--green);
-  transition: color 0.3s, background-color 0.3s ease;
-}
-
-.attribution-link:link {
-  color: var(--green);
-}
-
-.attribution-link:focus {
   text-decoration: none;
-  background: var(--grey--900);
-  color: var(--white);
+  transition: color 0.4s, background-color 0.8s ease;
 }
 
 .attribution-link:hover {
-  text-decoration: none;
   background: var(--green);
   color: var(--grey--900);
 }
 
-.attribution-link:active {
-  background: var(--grey--900);
-  color: var(--green);
-} */
 @media (min-width: 700px) {
   .form-wrapper {
     min-width: 700px;

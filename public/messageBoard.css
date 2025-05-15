@@ -6,6 +6,7 @@
 
 .main-wrapper {
   color: var(--text);
+  min-height: 100vh;
 }
 
 .li {
@@ -57,5 +58,11 @@
 @media (min-width: 600px) {
   .edit-btn {
     padding: 0.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ul {
+    padding-inline: 2rem;
   }
 }

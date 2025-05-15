@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 require("./passport/passport")(passport);
 app.use(passport.initialize());
+app.use("/favicon.ico", express.static("public/images/favicon.ico"));
 
 app.use("/", router);
 

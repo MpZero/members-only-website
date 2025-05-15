@@ -1,8 +1,11 @@
 .errors-ul {
-  color: var(--text);
-  font-size: clamp(0.6rem, 2vw, 0.8rem);
+  list-style: none;
+  margin: 1rem 0;
+  color: red;
 }
+
 .errors-li {
-  border-radius: 4px;
   background-color: var(--grey--700);
+  padding: 0.2rem;
+  border-radius: 4px;
 }

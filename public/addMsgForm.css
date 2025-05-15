@@ -1,11 +1,11 @@
 .page-wrapper {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .main-wrapper {
-  height: 100vh;
+  min-height: 100vh;
   padding: 0 1rem 2rem 1rem;
 }
 

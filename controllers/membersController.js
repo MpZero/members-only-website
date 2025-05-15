@@ -27,8 +27,6 @@ const validateUser = [
     .isLength({ min: 1, max: 20 })
     .withMessage(`Username ${lengthErr}`),
   body("confirmPassword").custom((value, { req }) => {
-    // console.log(`value: ${value}`);
-    // console.log(`req body password: ${req.body.password}`);
     if (value !== req.body.password) {
       throw new Error("Password confirmation does not match with password");
     }
@@ -76,16 +74,34 @@ const createUserPost = [
       );
 
       const user = newUser.rows[0];
-      const jwt = issueJWT(user);
+      // const jwt = issueJWT(user);
 
-      res.json({
-        success: true,
-        user: user,
-        token: jwt.token,
-        expiresIn: jwt.expires,
+      // res.json({
+      //   success: true,
+      //   user: user,
+      //   token: jwt.token,
+      //   expiresIn: jwt.expires,
+
+      // });
+
+      return res.render("logIn", {
+        title: "Create User",
+        username: user.username,
       });
+      // } catch (err) {
+      //   return next(err);
+      // }
     } catch (err) {
-      return next(err);
+      console.log(err);
+
+      return res.status(400).render("signUp", {
+        firstName: firstName || "",
+        lastName: lastName || "",
+        username: username || "",
+        password: password || "",
+        title: "Create user" || "",
+        errors: [{ msg: "Username already exists" }],
+      });
     }
   },
 ];
@@ -155,7 +171,6 @@ const updateMemStatusGet = (req, res) => {
 };
 
 const updateMemStatusPost = async (req, res) => {
-  // console.log(`5 body`, req.body);
   const passcode = req.body.password;
   try {
     if (passcode == process.env.SECRET_PW) {
@@ -164,39 +179,17 @@ const updateMemStatusPost = async (req, res) => {
         [req.user.users_id]
       );
       console.log("succesfully became a member!");
-      return res.redirect("/");
+      return res.redirect("/message-board");
     } else {
-      return res.status(400).json({ msg: "Invalid passcode" });
+      return res.status(400).render("updateMem", {
+        title: "Update Membership",
+        errors: [{ msg: "Invalid password" }],
+      });
     }
   } catch (error) {
     console.log("incorrect pw!");
     return res.status(500).json({ msg: "Server error", error });
   }
-  // console.log(`req user updatemempost`, req.user);
-
-  // console.log(`req user updatemempost2`, req.user);
-
-  //   console.log(`body`, req.body);
-  //   console.log(`user`, req.user);
-
-  //   const { passcode } = req.body;
-  // }
-  // return;
-
-  /*   if (passcode == "oo") {
-    try {
-      await pool.query(
-        "UPDATE users SET mem_status = true WHERE users_id = $1",
-        [req.user.users_id]
-      );
-      return res.redirect("/");
-    } catch (err) {
-      console.log(err);
-      return res.status(500).json({ msg: "Server error" });
-    }
-  } else {
-    return res.status(400).json({ msg: "Invalid passcode" });
-  } */
 };
 
 module.exports = {
