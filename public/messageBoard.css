@@ -18,7 +18,7 @@
   gap: 0.2em;
 }
 
-.li > p:nth-child(3) {
+.msg-text {
   background-color: var(--grey--700);
   border-radius: 4px;
   padding: 0.4rem;

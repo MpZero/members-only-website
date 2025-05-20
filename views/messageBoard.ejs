@@ -23,7 +23,9 @@
             <p><b class="msg-info">User:</b> <%=message.username%></p>
 
             <p><b class="msg-info">Title:</b> <%= message.title %></p>
-            <p><b class="msg-info">Message:</b> <%= message.text %></p>
+            <p class="msg-text">
+              <b class="msg-info">Message:</b> <%= message.text %>
+            </p>
             <p>
               <b class="msg-info">Added on:</b> <%=
               message.timestamp.toDateString() %>
@@ -34,9 +36,11 @@
               href="/message-board/edit/<%= message.messages_id%>"
               >Edit</a
             >
-            <%}else {%> <%return%> <%} %> <%} else {%>
-            <p><b>Title:</b> <%= message.title %></p>
-            <p><b>Message:</b> <%= message.text %></p>
+            <%} %> <%} else {%>
+            <p><b class="msg-info">Title:</b> <%= message.title %></p>
+            <p class="msg-text">
+              <b class="msg-info">Message:</b> <%= message.text %>
+            </p>
             <%} %>
           </li>
           <%})%>

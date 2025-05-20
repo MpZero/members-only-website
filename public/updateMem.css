@@ -11,9 +11,7 @@ h1 {
 }
 
 .error-wrapper {
-  display: flex;
-  justify-content: center;
-  background-color: var(--grey--700);
+  text-align: center;
 }
 
 .form-wrapper {

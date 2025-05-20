@@ -1,4 +1,10 @@
 const pool = require("../db/database.js");
+const { body, validationResult } = require("express-validator");
+
+const validateMsg = [
+  body("title").not().isEmpty().trim().isLength({ min: 1, max: 30 }),
+  body("msg").not().isEmpty().trim().isLength({ min: 1, max: 250 }),
+];
 
 async function getMessages(req, res) {
   const user = req.user;
@@ -32,20 +38,30 @@ async function getMessages(req, res) {
 function getCreateMessage(req, res) {
   res.render("addMsgForm", { title: "Create a New Message" });
 }
-async function postCreateMessage(req, res) {
-  const userId = req.user.users_id;
-  const title = req.body.title;
-  const text = req.body.msg;
-  await pool.query(
-    "INSERT INTO messages (title, user_id, text) VALUES ($1, $2, $3)",
-    [title, userId, text]
-  );
+const postCreateMessage = [
+  validateMsg,
+  async (req, res) => {
+    const userId = req.user.users_id;
+    const title = req.body.title;
+    const text = req.body.msg;
 
-  res.redirect("/message-board");
-}
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render("addMsgForm", {
+        title: "Create a New Message",
+        errors: errors.array(),
+      });
+    }
+    await pool.query(
+      "INSERT INTO messages (title, user_id, text) VALUES ($1, $2, $3)",
+      [title, userId, text]
+    );
+
+    res.redirect("/message-board");
+  },
+];
 
 async function getMessageUpdate(req, res) {
-  console.log(req.params);
   const msgId = req.params.id;
 
   try {
@@ -54,7 +70,6 @@ async function getMessageUpdate(req, res) {
       [msgId]
     );
     const message = row.rows;
-    console.log(message);
 
     res.render("updateMsg", {
       title: "Update Message",
@@ -66,21 +81,24 @@ async function getMessageUpdate(req, res) {
   }
 }
 
-async function postMessageUpdate(req, res) {
-  try {
-    const msgId = req.params.id;
-    const title = req.body.title;
-    const msg = req.body.msg;
-    await pool.query(
-      "UPDATE messages SET title = $1, text = $2 WHERE messages_id = $3 ",
-      [title, msg, msgId]
-    );
-    res.redirect("/message-board");
-  } catch (error) {
-    console.error("Error getting message:", error);
-    throw new Error("Failed to retrieve message");
-  }
-}
+const postMessageUpdate = [
+  validateMsg,
+  async (req, res) => {
+    try {
+      const msgId = req.params.id;
+      const title = req.body.title;
+      const msg = req.body.msg;
+      await pool.query(
+        "UPDATE messages SET title = $1, text = $2 WHERE messages_id = $3 ",
+        [title, msg, msgId]
+      );
+      res.redirect("/message-board");
+    } catch (error) {
+      console.error("Error getting message:", error);
+      throw new Error("Failed to retrieve message");
+    }
+  },
+];
 
 module.exports = {
   getMessages,

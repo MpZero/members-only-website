@@ -6,26 +6,11 @@ const {
   issueJWT,
 } = require("../utils/passwordUtils");
 require("dotenv").config();
-const alphaErr = "must only contain letters.";
-const lengthErr = "must be between 1 and 15 characters.";
 
 const validateUser = [
-  body("firstName")
-    .trim()
-    .isAlpha()
-    .withMessage(`First name ${alphaErr}`)
-    .isLength({ min: 1, max: 15 })
-    .withMessage(`First name ${lengthErr}`),
-  body("lastName")
-    .trim()
-    .isAlpha()
-    .withMessage(`Last name ${alphaErr}`)
-    .isLength({ min: 1, max: 15 })
-    .withMessage(`Last name ${lengthErr}`),
-  body("username")
-    .trim()
-    .isLength({ min: 1, max: 20 })
-    .withMessage(`Username ${lengthErr}`),
+  body("firstName").trim().isLength({ min: 1, max: 15 }),
+  body("lastName").trim().isLength({ min: 1, max: 15 }),
+  body("username").trim().isLength({ min: 1, max: 20 }),
   body("confirmPassword").custom((value, { req }) => {
     if (value !== req.body.password) {
       throw new Error("Password confirmation does not match with password");
@@ -48,8 +33,6 @@ function createUserGet(req, res) {
 const createUserPost = [
   validateUser,
   async (req, res, next) => {
-    console.log("Received req.body:", req.body);
-
     const errors = validationResult(req);
 
     const { firstName, lastName, username, password } = req.body;
@@ -74,26 +57,12 @@ const createUserPost = [
       );
 
       const user = newUser.rows[0];
-      // const jwt = issueJWT(user);
-
-      // res.json({
-      //   success: true,
-      //   user: user,
-      //   token: jwt.token,
-      //   expiresIn: jwt.expires,
-
-      // });
 
       return res.render("logIn", {
         title: "Create User",
         username: user.username,
       });
-      // } catch (err) {
-      //   return next(err);
-      // }
     } catch (err) {
-      console.log(err);
-
       return res.status(400).render("signUp", {
         firstName: firstName || "",
         lastName: lastName || "",
@@ -167,7 +136,6 @@ const logOut = (req, res) => {
 
 const updateMemStatusGet = (req, res) => {
   res.render("updateMem", { title: "Update Membership" });
-  console.log(`req user updatememget`, req.user);
 };
 
 const updateMemStatusPost = async (req, res) => {
@@ -178,7 +146,6 @@ const updateMemStatusPost = async (req, res) => {
         "UPDATE users SET mem_status = true WHERE users_id = $1",
         [req.user.users_id]
       );
-      console.log("succesfully became a member!");
       return res.redirect("/message-board");
     } else {
       return res.status(400).render("updateMem", {
@@ -187,7 +154,6 @@ const updateMemStatusPost = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("incorrect pw!");
     return res.status(500).json({ msg: "Server error", error });
   }
 };
