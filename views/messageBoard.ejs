@@ -13,9 +13,13 @@
   </head>
   <body>
     <div class="page-wrapper">
-      <%- include("partials/navbar") %>
+      <%- include("partials/navbar", {username: username}) %>
       <main class="main-wrapper">
         <h1 class="h1">Message Board</h1>
+        <h2 class="h2">
+          Welcome back,
+          <b class="username"><%= username %></b>
+        </h2>
         <ul class="ul">
           <% messages.map((message) => { %>
           <li class="li msg-wrapper">

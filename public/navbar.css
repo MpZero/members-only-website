@@ -50,4 +50,20 @@
   .img-navbar {
     width: 25px;
   }
+
+  .h2-navbar {
+    border: none;
+    color: var(--text);
+    font-size: clamp(0.7rem, 1.2vw, 1rem);
+    padding: 1rem;
+    background-color: var(--grey--800);
+    border-radius: 10px;
+    border: 1px solid white;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .username {
+    color: var(--green);
+  }
 }

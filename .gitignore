@@ -1,4 +1,5 @@
 createdb.js
+createdbprod.js
 .env
 node_modules/
 id_rsa_priv.pem
