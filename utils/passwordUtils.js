@@ -3,8 +3,10 @@ const path = require("path");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const pathToKey = path.join(__dirname, "..", "id_rsa_priv.pem");
-const PRIV_KEY = fs.readFileSync(pathToKey, "utf8");
+// const pathToKey = path.join(__dirname, "..", "id_rsa_priv.pem");
+// const PRIV_KEY = fs.readFileSync(pathToKey, "utf8");
+
+const PRIV_KEY = process.env.PRIVATE_KEY;
 
 function issueJWT(user) {
   const id = user.users_id;
