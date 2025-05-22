@@ -21,33 +21,36 @@
           <b class="username"><%= username %></b>
         </h2>
         <ul class="ul">
-          <% messages.map((message) => { %>
+          <% if (!hasMessages) { %>
+          <li class="li msg-wrapper no-msg">
+            <p><i>No messages yet. Be the first to post!</i></p>
+          </li>
+          <% } %> <% messages.map((message) => { %>
           <li class="li msg-wrapper">
-            <% if (message.username){%>
-            <p><b class="msg-info">User:</b> <%=message.username%></p>
-
+            <% if (isMember) { %>
+            <p><b class="msg-info">User:</b> <%= message.username %></p>
             <p><b class="msg-info">Title:</b> <%= message.title %></p>
             <p class="msg-text">
               <b class="msg-info">Message:</b> <%= message.text %>
             </p>
             <p>
-              <b class="msg-info">Added on:</b> <%=
-              message.timestamp.toDateString() %>
+              <b class="msg-info">Added on:</b> <%= new
+              Date(message.timestamp).toDateString() %>
             </p>
-            <% if (message.username == username){%>
+            <% if (message.username === username) { %>
             <a
               class="edit-btn"
-              href="/message-board/edit/<%= message.messages_id%>"
+              href="/message-board/edit/<%= message.messages_id %>"
               >Edit</a
             >
-            <%} %> <%} else {%>
+            <% } %> <% } else { %>
             <p><b class="msg-info">Title:</b> <%= message.title %></p>
             <p class="msg-text">
               <b class="msg-info">Message:</b> <%= message.text %>
             </p>
-            <%} %>
+            <% } %>
           </li>
-          <%})%>
+          <% }) %>
         </ul>
       </main>
       <%- include("partials/navbarMobile") %>

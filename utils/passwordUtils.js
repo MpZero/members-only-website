@@ -29,10 +29,6 @@ function issueJWT(user) {
 async function validPassword(password, hash) {
   try {
     const match = await bcrypt.compare(password, hash);
-    if (!match) {
-      return console.log("Incorrect password");
-    }
-
     return match;
   } catch (err) {
     console.error(err);

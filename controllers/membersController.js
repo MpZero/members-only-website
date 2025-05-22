@@ -59,7 +59,7 @@ const createUserPost = [
       const user = newUser.rows[0];
 
       return res.render("logIn", {
-        title: "Create User",
+        title: "Log in",
         username: user.username,
       });
     } catch (err) {
@@ -77,9 +77,8 @@ const createUserPost = [
 
 function logInGet(req, res) {
   res.render("logIn", {
-    username: "",
-    password: "",
     title: "Log In",
+    username: "",
     errors: [],
   });
 }
@@ -135,7 +134,9 @@ const logOut = (req, res) => {
 };
 
 const updateMemStatusGet = (req, res) => {
-  res.render("updateMem", { title: "Update Membership" });
+  const username = req.user.username;
+
+  res.render("updateMem", { title: "Update Membership", username: username });
 };
 
 const updateMemStatusPost = async (req, res) => {

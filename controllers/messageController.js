@@ -8,27 +8,34 @@ const validateMsg = [
 
 async function getMessages(req, res) {
   const user = req.user;
+
   try {
-    if (user && user.mem_status == true) {
-      const rows = await pool.query(
-        "SELECT messages_id, title, text, timestamp, username FROM messages JOIN users ON users.users_id = messages.user_id ORDER BY timestamp DESC"
-      );
-
-      const messages = rows.rows;
-      const username = user.username;
-      res.render("messageBoard", {
-        title: "Message Board",
-        messages,
-        username,
-      });
-    } else if (user && user.mem_status == false) {
-      const rows = await pool.query(
-        "SELECT messages_id, title, text FROM messages ORDER BY messages_id DESC"
-      );
-
-      const messages = rows.rows;
-      res.render("messageBoard", { title: "Message Board", messages });
+    let query;
+    if (user && user.mem_status) {
+      query = `
+        SELECT messages_id, title, text, timestamp, username 
+        FROM messages 
+        JOIN users ON users.users_id = messages.user_id 
+        ORDER BY timestamp DESC
+      `;
+    } else {
+      query = `
+        SELECT messages_id, title, text 
+        FROM messages 
+        ORDER BY messages_id DESC
+      `;
     }
+
+    const rows = await pool.query(query);
+    const messages = rows.rows;
+
+    res.render("messageBoard", {
+      title: "Message Board",
+      messages,
+      username: user?.username || "",
+      isMember: user?.mem_status || false,
+      hasMessages: messages.length > 0,
+    });
   } catch (error) {
     console.error("Error fetching messages: ", error);
     res.status(500).send("Error fetching messages");
@@ -36,7 +43,12 @@ async function getMessages(req, res) {
 }
 
 function getCreateMessage(req, res) {
-  res.render("addMsgForm", { title: "Create a New Message" });
+  const username = req.user.username;
+
+  res.render("addMsgForm", {
+    title: "Create a New Message",
+    username: username,
+  });
 }
 const postCreateMessage = [
   validateMsg,
@@ -63,6 +75,7 @@ const postCreateMessage = [
 
 async function getMessageUpdate(req, res) {
   const msgId = req.params.id;
+  const username = req.user.username;
 
   try {
     const row = await pool.query(
@@ -74,6 +87,7 @@ async function getMessageUpdate(req, res) {
     res.render("updateMsg", {
       title: "Update Message",
       message: message,
+      username: username,
     });
   } catch (error) {
     console.error("Error getting message:", error);
